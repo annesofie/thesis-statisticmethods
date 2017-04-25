@@ -6,11 +6,15 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 import numpy as np
 
-local_filepath = '/Users/AnneSofie/Documents/5.klasse/master/statistic_analysis/data/'
+local_filepath = '/Users/AnneSofie/Documents/5.klasse/master/thesis-statisticmethods/statistic_analysis/data/'
 
 file_all_exclude_task4 = 'allParticipantsResultExcludeTask4.csv'
-file_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
+file_all_sorted_age = 'allParticipants_sorted_age.csv'
+file_all_sorted_age_exclude_task4 = 'allParticipants_sorted_age_exclude_task4.csv'
+f
+ile_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
 file_all_exclude_task4_exclude_2participants = 'allParticipantsResultExcludeTask4And2Participants.csv'
+
 file_experienced_exclude_task4 = 'experiencedResultExcludeTask4.csv'
 file_experienced = 'experiencedResult.csv'
 file_non_experienced_exclude_task4 = 'nonExperiencedResultExcludeTask4.csv'
@@ -81,9 +85,13 @@ def pairedTest(filename1, filename2):
     return stats.ttest_1samp(data1['correctgeom'] - data1['correctmetadata'], 0)  # 1 sample t-test
 
 
-def normalDistributionFit(filename):
+def createHistogram(filename, filter):
+    data = readFileReturnFilteredData(filename, filter)
+    plt.hist(data, bins=len(data) - 1)
+
+
+def normalDistributionFit(filename, filter):
     data_all = readCsvFile(filename)
-    filter = 'metatasktime'
     data = data_all[filter]
 
     # Fit a normal distribution to the data:
@@ -103,4 +111,18 @@ def normalDistributionFit(filename):
     title = filter + " Fit results: mu = %.2f,  std = %.2f" % (mu, std)
     plt.title(title)
 
+    plt.show()
+
+
+def create_bar_chart(filename, filter):
+    data = readCsvFile(filename)
+    N = len(data)
+    p = data['participant']
+    print(p)
+    x = range(N)
+    y = data[filter]
+    plt.bar(x, y, align='center')
+    plt.xticks(x, data['correctgeom'])
+    plt.ylabel(filter)
+    #plt.title(filter + '  ' + filename)
     plt.show()
