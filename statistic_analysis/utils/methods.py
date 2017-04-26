@@ -9,11 +9,18 @@ import numpy as np
 local_filepath = '/Users/AnneSofie/Documents/5.klasse/master/thesis-statisticmethods/statistic_analysis/data/'
 
 file_all_exclude_task4 = 'allParticipantsResultExcludeTask4.csv'
+
 file_all_sorted_age = 'allParticipants_sorted_age.csv'
+file_all_sorted_age_agefield = 'allParticipants_age_sorted.csv'
 file_all_sorted_age_exclude_task4 = 'allParticipants_sorted_age_exclude_task4.csv'
-f
-ile_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
+file_all_sorted_age_agefield_exclude_task4 = 'allParticipants_age_sorted_excludetask4.csv'
+
+file_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
 file_all_exclude_task4_exclude_2participants = 'allParticipantsResultExcludeTask4And2Participants.csv'
+
+file_one_element_results = 'oneElementTaskResult.csv'
+file_three_elements_results = 'threeElementTaskResult.csv'
+file_six_elements_results = 'sixElementTaskResult.csv'
 
 file_experienced_exclude_task4 = 'experiencedResultExcludeTask4.csv'
 file_experienced = 'experiencedResult.csv'
@@ -58,7 +65,8 @@ def calculateMean(data):
     return data.mean()
 
 
-def pandaDescribe(data):
+def pandaDescribe(filename, filter):
+    data = readFileReturnFilteredData(filename, filter)
     return pandas.DataFrame.describe(data)  # Calculates count, mean, std, min, max
 
 
@@ -117,12 +125,10 @@ def normalDistributionFit(filename, filter):
 def create_bar_chart(filename, filter):
     data = readCsvFile(filename)
     N = len(data)
-    p = data['participant']
-    print(p)
     x = range(N)
     y = data[filter]
     plt.bar(x, y, align='center')
-    plt.xticks(x, data['correctgeom'])
-    plt.ylabel(filter)
-    #plt.title(filter + '  ' + filename)
+    plt.xticks(x, data['participant_age'])
+    plt.ylabel(filter + ' (sec)')
+    plt.xlabel('Participant age')
     plt.show()
