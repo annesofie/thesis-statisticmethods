@@ -1,0 +1,34 @@
+id,difficulty,besteffort,interupted,comment,participant,task,participant_experienced,task_id
+83,5,True,False,b'',"id: 122, experienced: True","id: 1, title: Building geometry and metadata",True,1
+98,2,True,False,b'',"id: 135, experienced: True","id: 1, title: Building geometry and metadata",True,1
+77,5,True,False,b'',"id: 120, experienced: True","id: 1, title: Building geometry and metadata",True,1
+70,5,True,True,b'',"id: 117, experienced: True","id: 1, title: Building geometry and metadata",True,1
+72,2,True,False,b'',"id: 119, experienced: True","id: 1, title: Building geometry and metadata",True,1
+103,5,True,True,b'',"id: 136, experienced: False","id: 1, title: Building geometry and metadata",False,1
+94,5,True,False,b'',"id: 134, experienced: False","id: 1, title: Building geometry and metadata",False,1
+130,5,True,False,b'',"id: 164, experienced: False","id: 1, title: Building geometry and metadata",False,1
+100,2,True,False,b'',"id: 135, experienced: True","id: 2, title: Building geometry and metadata",True,2
+102,5,True,False,b'',"id: 136, experienced: False","id: 2, title: Building geometry and metadata",False,2
+127,2,True,False,b'',"id: 161, experienced: False","id: 2, title: Building geometry and metadata",False,2
+76,5,True,False,b'Sometimes hard to distinguish between shadow and the contour lines of the buildings.',"id: 120, experienced: True","id: 2, title: Building geometry and metadata",True,2
+84,5,True,False,b'',"id: 122, experienced: True","id: 2, title: Building geometry and metadata",True,2
+68,2,True,False,b'Omrisset p\xe5 bygningene og firkantene stemte ikke?',"id: 117, experienced: True","id: 2, title: Building geometry and metadata",True,2
+95,5,True,False,b'',"id: 134, experienced: False","id: 2, title: Building geometry and metadata",False,2
+73,2,True,False,b'',"id: 119, experienced: True","id: 2, title: Building geometry and metadata",True,2
+104,2,True,True,b'',"id: 136, experienced: False","id: 3, title: Building geometry and metadata",False,3
+69,5,True,False,b'N\xe5 skj\xf8nte jeg fargevalget...',"id: 117, experienced: True","id: 3, title: Building geometry and metadata",True,3
+99,3,True,False,b'',"id: 135, experienced: True","id: 3, title: Building geometry and metadata",True,3
+96,1,True,False,b'',"id: 134, experienced: False","id: 3, title: Building geometry and metadata",False,3
+78,5,True,False,b'Sometimes a bit confusing to know which number each of the buildings on the map are.',"id: 120, experienced: True","id: 3, title: Building geometry and metadata",True,3
+82,5,True,False,b'',"id: 122, experienced: True","id: 3, title: Building geometry and metadata",True,3
+131,2,True,True,b'',"id: 164, experienced: False","id: 3, title: Building geometry and metadata",False,3
+74,5,True,False,b'',"id: 119, experienced: True","id: 3, title: Building geometry and metadata",True,3
+93,2,True,False,b'',"id: 134, experienced: False","id: 4, title: Training Task",False,4
+71,5,True,False,b'',"id: 119, experienced: True","id: 4, title: Training Task",True,4
+75,5,True,False,b'',"id: 120, experienced: True","id: 4, title: Training Task",True,4
+81,1,True,False,b'',"id: 122, experienced: True","id: 4, title: Training Task",True,4
+67,3,True,False,"b'Litt forvirret i starten, forbedre layouten?'","id: 117, experienced: True","id: 4, title: Training Task",True,4
+97,5,True,False,b'',"id: 135, experienced: True","id: 4, title: Training Task",True,4
+101,5,True,False,b'',"id: 136, experienced: False","id: 4, title: Training Task",False,4
+126,3,True,False,b'',"id: 161, experienced: False","id: 4, title: Training Task",False,4
+129,2,False,False,b'',"id: 164, experienced: False","id: 4, title: Training Task",False,4
