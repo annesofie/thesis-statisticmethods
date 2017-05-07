@@ -15,6 +15,9 @@ file_all_sorted_age = 'allParticipants_sorted_age.csv'
 file_all_sorted_age_agefield = 'allParticipants_age_sorted.csv'
 file_all_sorted_age_exclude_task4 = 'allParticipants_sorted_age_exclude_task4.csv'
 file_all_sorted_age_agefield_exclude_task4 = 'allParticipants_age_sorted_excludetask4.csv'
+file_all_sorted_totaltime_exclude_task4 = 'all_excludetask4_sorted_totaltime.csv'
+file_all_sorted_totalcorrect_exclude_task4 = 'all_excludetask4_sorted_totalcorrect.csv'
+file_all_sorted_age_totalcorrect_exclude_task4 = 'all_excludetask4_sorted_age_totalcorrect.csv'
 file_all_sorted_age_task_exclude_task4 = 'allParticipants_age_task_sorted_excludetask4.csv'
 
 file_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
@@ -25,8 +28,10 @@ file_three_elements_results = 'threeElementTaskResult.csv'
 file_six_elements_results = 'sixElementTaskResult.csv'
 
 file_experienced_exclude_task4 = 'experiencedResultExcludeTask4.csv'
+file_experienced_exclude_task4_taskid = 'experienced_excludetask4_taskid.csv'
 file_experienced = 'experiencedResult.csv'
 file_non_experienced_exclude_task4 = 'nonExperiencedResultExcludeTask4.csv'
+file_non_experienced_exclude_task4_taskid = 'nonExperienced_excludetask4_taskid.csv'
 file_non_experienced = 'nonExperiencedResult.csv'
 
 
@@ -87,7 +92,15 @@ def pairedTest(filename1, filename2):
 
 def createHistogram(filename, filter):
     data = readFileReturnFilteredData(filename, filter)
-    plt.hist(data, bins=len(data) - 1)
+    plt.hist(data)
+
+
+def createNormalHistogram(filename, filter):
+    data = readCsvFile(filename)
+    fit = stats.norm.pdf(data[filter], np.mean(data[filter]), np.std(data[filter]))
+    plt.plot(data[filter], fit, '-o')
+    plt.hist(data[filter], normed=True)
+    plt.show()
 
 
 def normalDistributionFit(filename, filter):
@@ -131,7 +144,7 @@ def create_bar_chart(filename, filter):
 
     plt.bar(x, y, align='center', color=colors, alpha=0.7)
     plt.xticks(x, data['participant_age'])
-    plt.ylabel(filter + ' (sec)')
+    plt.ylabel('Total correct elements')
     plt.xlabel('Participant age')
 
     orange_patch = mpatches.Patch(color='orange', alpha=0.7, label='Task 1')
