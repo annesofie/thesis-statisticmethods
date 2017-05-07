@@ -95,7 +95,7 @@ def createHistogram(filename, filter):
     plt.hist(data)
 
 
-def createNormalHistogram(filename, filter):
+def st(filename, filter):
     data = readCsvFile(filename)
     fit = stats.norm.pdf(data[filter], np.mean(data[filter]), np.std(data[filter]))
     plt.plot(data[filter], fit, '-o')
