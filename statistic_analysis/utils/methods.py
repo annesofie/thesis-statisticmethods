@@ -9,30 +9,44 @@ import numpy as np
 
 local_filepath = '/Users/AnneSofie/Documents/5.klasse/master/thesis-statisticmethods/statistic_analysis/data/'
 
-file_all_exclude_task4 = 'allParticipantsResultExcludeTask4.csv'
+# ALL
+path = 'all_participants/'
+file_all_orderby_totaltime = path + 'all_orderby_totaltime.csv'
+file_excludetask4 = path + 'allParticipantsResultExcludeTask4.csv'
+file_excludetask4_orderby_totaltime = path + 'allExcludeTask4_Orderby_totaltime.csv'
+file_excludetask4_orderby_age_filterlessthan2000 = path + 'allExcludeTask4totaltimebiggerthan2000orderbyparticipant__age.csv'
+file_excludetask4_orderby_totalcorrect = path + 'allParticipantsResultExcludeTask4orderbytotal_correct_elements.csv'
+file_excludetask4_orderby_age = path + 'allParticipantsResultExcludeTask4orderbyparticipant__age.csv'
+file_excludetask4_filtertotaltime_orderby_age = path + 'allExcludeTask4totaltimebiggerthan2000orderbyparticipant__age.csv'
 
-file_all_sorted_age = 'allParticipants_sorted_age.csv'
-file_all_sorted_age_agefield = 'allParticipants_age_sorted.csv'
-file_all_sorted_age_exclude_task4 = 'allParticipants_sorted_age_exclude_task4.csv'
-file_all_sorted_age_agefield_exclude_task4 = 'allParticipants_age_sorted_excludetask4.csv'
-file_all_sorted_totaltime_exclude_task4 = 'all_excludetask4_sorted_totaltime.csv'
-file_all_sorted_totalcorrect_exclude_task4 = 'all_excludetask4_sorted_totalcorrect.csv'
-file_all_sorted_age_totalcorrect_exclude_task4 = 'all_excludetask4_sorted_age_totalcorrect.csv'
-file_all_sorted_age_task_exclude_task4 = 'allParticipants_age_task_sorted_excludetask4.csv'
+# Interupted
+path = 'was_interupted_participants/'
+file_was_interupted_orderedby_difficulty = path + 'allParticipants_wasinterupted_orderby_difficulty.csv'
 
-file_all_exclude_task4_exclude_participant = 'allParticipantsResultExcludeTask4ExcludeLastParticipant.csv'
-file_all_exclude_task4_exclude_2participants = 'allParticipantsResultExcludeTask4And2Participants.csv'
+# Experienced
+path_e = 'experienced_participants/'
+path_in = 'inexperienced_participants/'
+file_experienced_orderby_totaltime = path_e + 'experiencedResult_orderby_totaltime.csv'
+file_experienced_orderby_totaltime_exclude4 = path_e + 'experiencedResultExcludeTask4_orderby_totaltime.csv'
+file_experienced_orderby_age = path_e + 'experiencedResult_orderby_participant__age.csv'
+file_inexperienced_orderby_totaltime = path_in + 'nonExperiencedResult_orderby_totaltime.csv'
+file_inexperienced_orderby_totaltime_exclude4 = path_in + 'inExperiencedResultExcludeTask4_orderby_totaltime.csv'
+file_inexperienced_orderby_age = path_in + 'nonExperiencedResult_orderby_participant__age.csv'
 
-file_one_element_results = 'oneElementTaskResult.csv'
-file_three_elements_results = 'threeElementTaskResult.csv'
-file_six_elements_results = 'sixElementTaskResult.csv'
+#Task
+path_1 = 'task1/'
+path_2 = 'task2/'
+path_3 = 'task3/'
+file_task1_orderedby_totaltime = path_1+'oneElementTaskResult_filtertotaltime_totaltime.csv'
+file_task1_orderedby_totaltime_experienced = path_1+'experiencedResult_exclude4_task1.csv'
+file_task1_orderedby_totaltime_inexperienced = path_1+'inExperiencedResult_exclude4_task1.csv'
+file_task2_orderedby_totaltime = path_2+'threeElementTaskResult_filtertotaltime_totaltime.csv'
+file_task2_orderedby_totaltime_experienced = path_2+'experiencedResult_exclude4_task2.csv'
+file_task2_orderedby_totaltime_inexperienced = path_2+'inExperiencedResult_exclude4_task2.csv'
+file_task3_orderedby_totaltime = path_3+'sixElementTaskResult_filtertotaltime_totaltime.csv'
+file_task3_orderedby_totaltime_experienced = path_3+'experiencedResult_exclude4_task3.csv'
+file_task3_orderedby_totaltime_inexperienced = path_3+'inExperiencedResult_exclude4_task3.csv'
 
-file_experienced_exclude_task4 = 'experiencedResultExcludeTask4.csv'
-file_experienced_exclude_task4_taskid = 'experienced_excludetask4_taskid.csv'
-file_experienced = 'experiencedResult.csv'
-file_non_experienced_exclude_task4 = 'nonExperiencedResultExcludeTask4.csv'
-file_non_experienced_exclude_task4_taskid = 'nonExperienced_excludetask4_taskid.csv'
-file_non_experienced = 'nonExperiencedResult.csv'
 
 
 def readCsvFile(filename=None):
@@ -90,16 +104,21 @@ def pairedTest(filename1, filename2):
     return stats.ttest_1samp(data1['correctgeom'] - data1['correctmetadata'], 0)  # 1 sample t-test
 
 
-def createHistogram(filename, filter):
+def createHistogram(filename, filter, xlabel='', ylabel='', title=''):
     data = readFileReturnFilteredData(filename, filter)
     plt.hist(data)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
 
 
-def st(filename, filter):
+
+def normalplot(filename, filter, title):
     data = readCsvFile(filename)
     fit = stats.norm.pdf(data[filter], np.mean(data[filter]), np.std(data[filter]))
     plt.plot(data[filter], fit, '-o')
     plt.hist(data[filter], normed=True)
+    plt.title(title)
     plt.show()
 
 
@@ -132,7 +151,7 @@ def create_bar_chart(filename, filter):
     N = len(data)
     x = range(N)
     y = data[filter]
-
+    print(len(data) - 1)
     colors = []
     for value in data['task_id']:
         if value == 1:
@@ -143,9 +162,36 @@ def create_bar_chart(filename, filter):
             colors.append('g')
 
     plt.bar(x, y, align='center', color=colors, alpha=0.7)
-    plt.xticks(x, data['participant_age'])
-    plt.ylabel('Total correct elements')
-    plt.xlabel('Participant age')
+    # plt.xticks(x, data['participant_age'])
+    plt.ylabel(filter)
+    plt.xlabel('Participants')
+
+    orange_patch = mpatches.Patch(color='orange', alpha=0.7, label='Task 1')
+    blue_patch = mpatches.Patch(color='b', alpha=0.7, label='Task 2')
+    green_patch = mpatches.Patch(color='g', alpha=0.7, label='Task 3')
+    plt.legend(handles=[orange_patch, blue_patch, green_patch])
+    plt.show()
+
+
+def create_bar_chart_data_x(filename, filter):
+    data = readCsvFile(filename)
+    N = len(data)
+    y = range(N)
+    x = data[filter]
+    print(len(data) - 1)
+    colors = []
+    for value in data['task_id']:
+        if value == 1:
+            colors.append('orange')
+        elif value == 2:
+            colors.append('b')
+        else:
+            colors.append('g')
+
+    plt.bar(x, y, align='center', color=colors, alpha=0.7)
+    # plt.xticks(x, data['participant_age'])
+    plt.xlabel(filter)
+    plt.ylabel('Participants')
 
     orange_patch = mpatches.Patch(color='orange', alpha=0.7, label='Task 1')
     blue_patch = mpatches.Patch(color='b', alpha=0.7, label='Task 2')

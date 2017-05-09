@@ -1,7 +1,7 @@
 import scipy
 from scipy import stats
 
-from utils.methods import readCsvFile, readFilesReturnFilteredData
+from .methods import readCsvFile, readFilesReturnFilteredData
 
 
 def shapiroWiikNormalityTest(filename, filter):
