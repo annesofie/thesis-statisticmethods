@@ -41,9 +41,16 @@ def normalityTest(filename, filter):
 
 
 def andersonDarlingTest(filename, field):
+    '''
+    The Anderson-Darling test is a modification of the Kolmogorov- Smirnov test kstest for the null hypothesis
+    that a sample is drawn from a population that follows a particular distribution
+    :param filename:
+    :param field:
+    :return:
+    '''
     data_all = readCsvFile(filename)
     data = data_all[field]
-    anderson_results = scipy.stats.anderson(data)
+    anderson_results = scipy.stats.anderson(data, dist='norm')
     matrix_ad = [
         ['', 'Number of entries', 'Test Statistic', 'p-value', 'ALL'],
         ['Sample Data', len(data) - 1, anderson_results[0], anderson_results[1][2], anderson_results]
