@@ -83,6 +83,14 @@ def normalplot(filename, filter, title):
     plt.show()
 
 
+def normalplot_data(data, title):
+    fit = stats.norm.pdf(data, np.mean(data), np.std(data))
+    plt.plot(data, fit, '-o')
+    plt.hist(data, normed=True)
+    plt.title(title)
+    plt.show()
+
+
 def normalDistributionFit(filename, filter):
     data_all = readCsvFile(filename)
     data = data_all[filter]

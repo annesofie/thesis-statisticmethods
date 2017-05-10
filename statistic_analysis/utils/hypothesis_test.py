@@ -1,5 +1,5 @@
 from scipy import stats
-from utils.methods import readFileReturnFilteredData, readFilesReturnFilteredData
+from .methods import readFileReturnFilteredData, readFilesReturnFilteredData
 
 def zscore_calculation(filename, filter):
     '''

@@ -1,7 +1,8 @@
 import scipy
 from scipy import stats
+import numpy as np
 
-from .methods import readCsvFile, readFilesReturnFilteredData
+from .methods import readCsvFile, readFilesReturnFilteredData, normalplot_data
 
 
 def shapiroWiikNormalityTest(filename, filter):
@@ -37,6 +38,23 @@ def normalityTest(filename, filter):
         ['', 'Entries', 's^2 + kˆ2', 'p-value'],
         ['Sample Data', len(data) - 1, results[0], results[1]]
     ]
+    return matrix_ap
+
+
+def normalityTest_data(data):
+    '''
+    Based on D'Agostino and Pearson normality test
+        H0: The sample comes from a normal distribution
+    Input: Array containing data to be tested
+    :return:
+     p-value: 2 sided chi squared probability for the hypothesis
+    '''
+    results = scipy.stats.mstats.normaltest(data)
+    matrix_ap = [
+        ['', 'Entries', 's^2 + kˆ2', 'p-value'],
+        ['Sample Data', len(data) - 1, results[0], results[1]]
+    ]
+    print(matrix_ap)
     return matrix_ap
 
 
@@ -80,3 +98,36 @@ def testEqualVariancesTest(filename1, filename2, filter):
         ['Sample Data', len(data1) - 1, len(data2) - 1, result_levene[0], result_levene[1], result_levene]
     ]
     return matrix_levene
+
+
+def log10_transform_sample(filename, filter, title):
+    '''
+    Return the base 10 logarithm of the input array, element-wise.
+    :param filename:
+    :param filter:
+    :return:
+        log 10 array
+    '''
+    data = readCsvFile(filename)
+    log_data = np.log10(data[filter])
+    normalplot_data(log_data, title)
+    normalityTest_data(log_data)
+
+
+def boxcox_transform_sample(filename, filter, title):
+    '''
+        Return a positive dataset transformed by a Box-Cox power transformation (log-likelihood function)
+    :param filename:
+    :param filter:
+    :return:
+        boxcox : ndarray
+            Box-Cox power transformed array.
+        maxlog : float, optional
+            If the lmbda parameter is None, the second returned argument
+            is the lambda that maximizes the log-likelihood function
+    '''
+    data = readCsvFile(filename)
+    boxcox_data = stats.boxcox(data[filter])
+    normalplot_data(boxcox_data[0], title)
+    normalityTest_data(boxcox_data[0])
+    print(boxcox_data[1] + ' = lambda')
