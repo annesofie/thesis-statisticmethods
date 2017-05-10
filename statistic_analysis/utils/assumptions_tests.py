@@ -130,4 +130,4 @@ def boxcox_transform_sample(filename, filter, title):
     boxcox_data = stats.boxcox(data[filter])
     normalplot_data(boxcox_data[0], title)
     normalityTest_data(boxcox_data[0])
-    print(boxcox_data[1] + ' = lambda')
+    print(boxcox_data[1])
