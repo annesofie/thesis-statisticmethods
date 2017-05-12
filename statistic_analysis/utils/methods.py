@@ -74,11 +74,21 @@ def createHistogram(filename, filter, xlabel='', ylabel='', title=''):
     plt.title(title)
 
 
-def normalplot(filename, filter, title):
+def createMeanPlot(mean1, mean2, mean3, xlabel='', ylabel='', title=''):
+    plt.plot([1, 2, 3], [mean1, mean2, mean3], 'ro')
+    plt.axis([0, 3, 100, 200])
+    plt.margins(0.05)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+
+
+def normalplot(filename, filter, title, xlabel):
     data = readCsvFile(filename)
     fit = stats.norm.pdf(data[filter], np.mean(data[filter]), np.std(data[filter]))
     plt.plot(data[filter], fit, '-o')
     plt.hist(data[filter], normed=True)
+    plt.xlabel(xlabel)
     plt.title(title)
     plt.show()
 

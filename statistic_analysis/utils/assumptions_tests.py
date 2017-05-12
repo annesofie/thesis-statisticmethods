@@ -2,7 +2,7 @@ import scipy
 from scipy import stats
 import numpy as np
 
-from .methods import readCsvFile, readFilesReturnFilteredData, normalplot_data
+from .methods import readCsvFile, readFilesReturnFilteredData, normalplot_data, readFileReturnFilteredData
 
 
 def shapiroWiikNormalityTest(filename, filter):
@@ -76,10 +76,11 @@ def andersonDarlingTest(filename, field):
     return matrix_ad
 
 
-def testEqualVariancesTest(filename1, filename2, filter):
+def testEqualVariancesTest(filename1, filename2, filename3=None, filter=None):
     '''
     Tests the null hypothesis that all input samples are from populations with equal variances
         https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.levene.html
+    :param filename3:
     :param filename1:
     :param filename2:
     :param filter:
@@ -91,8 +92,23 @@ def testEqualVariancesTest(filename1, filename2, filter):
         test statistic
         p-value
     '''
-    data1, data2 = readFilesReturnFilteredData(filename1, filename2, filter)
-    result_levene = stats.levene(data1, data2, center='mean')
+
+    if filter is None:
+        data1 = filename1
+        data2 = filename2
+        data3 = filename3
+        center = 'mean'
+    else:
+        data1, data2 = readFilesReturnFilteredData(filename1, filename2, filter)
+        if filename3 is not None:
+            data3 = readFileReturnFilteredData(filename3, filter)
+        center = 'median'
+
+    if filename3 is None:
+        result_levene = stats.levene(data1, data2, center=center)
+    else:
+        result_levene = stats.levene(data1, data2, data3, center=center)
+
     matrix_levene = [
         ['', 'Number of entries 1', 'Number of entries 2', 'Test Statistic', 'p-value', 'ALL'],
         ['Sample Data', len(data1) - 1, len(data2) - 1, result_levene[0], result_levene[1], result_levene]
@@ -114,8 +130,8 @@ def log10_transform_sample(filename, filter, title):
     normalityTest_data(log_data)
 
 
-def boxcox_transform_sample(filename, filter, title):
-    '''
+def boxcox_transform_sample(filename, filter, title=None):
+    """
         Return a positive dataset transformed by a Box-Cox power transformation (log-likelihood function)
     :param filename:
     :param filter:
@@ -125,9 +141,12 @@ def boxcox_transform_sample(filename, filter, title):
         maxlog : float, optional
             If the lmbda parameter is None, the second returned argument
             is the lambda that maximizes the log-likelihood function
-    '''
+    """
     data = readCsvFile(filename)
     boxcox_data = stats.boxcox(data[filter])
-    normalplot_data(boxcox_data[0], title)
-    normalityTest_data(boxcox_data[0])
-    print(boxcox_data[1])
+    if title is None:
+        return boxcox_data
+    else:
+        normalplot_data(boxcox_data[0], title)
+        normalityTest_data(boxcox_data[0])
+        print(boxcox_data[1])
