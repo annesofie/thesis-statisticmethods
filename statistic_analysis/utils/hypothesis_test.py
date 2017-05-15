@@ -174,7 +174,7 @@ def oneway_anova_posthoc_tukey(filename1, data_filter, signlev, transformeddata=
     """
     data = readCsvFile(filename1)
     if transformeddata is None:
-        data1 = data['time']
+        data1 = data[data_filter]
     else:
         data1 = transformeddata
     mc = pairwise_tukeyhsd(data1, data['task'], signlev)
