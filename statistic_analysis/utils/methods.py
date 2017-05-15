@@ -43,6 +43,12 @@ def pandaDescribe(filename, filter):
     return pandas.DataFrame.describe(data)  # Calculates count, mean, std, min, max
 
 
+def calculate_median(filename, filter):
+    data = readFileReturnFilteredData(filename, filter)
+    median_res = np.median(data)
+    print(median_res)
+
+
 def createScatterMatrix(filename1, filename2, filename3, field):
     data1 = readCsvFile(filename1)
     data1 = data1[field]
@@ -220,3 +226,38 @@ def create_probplot(filename, filter, title):
     scipy.stats.probplot(data[filter], dist='norm', plot=pylab)
     pylab.title(title)
     pylab.show()
+
+
+def create_box_plot(filename1, filename2=None, filename3=None, filter=None):
+    if filter is None:
+        data1 = filename1
+        data2 = filename2
+        data3 = filename3
+
+    else:
+        if filename2 is not None:
+            data1, data2 = readFilesReturnFilteredData(filename1, filename2, filter)
+        if filename3 is not None:
+            data3 = readFileReturnFilteredData(filename3, filter)
+
+    all_data = [data1, data2, data3]
+    plt.figure()
+    plt.boxplot(all_data)
+    plt.xlabel('Task number')
+    plt.ylabel('Total time (s)')
+    plt.show()
+
+
+def create_mean_std_plot(xaxis, mean, std, xlabel, ylabel):
+    # mean = [166.38, 172.25, 172.48]
+    # std = [84.57, 84.21, 77.95]
+    # xaxis = [1, 2, 3]
+
+    x = np.array(xaxis)
+    y = np.array(mean)
+    e = np.array(std)
+    plt.errorbar(range(len(xaxis)), y, e, linestyle='None', marker='o', mfc='green', mec='green', errorevery=1)
+    plt.xticks(range(len(xaxis)), xaxis, size='small')
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.show()

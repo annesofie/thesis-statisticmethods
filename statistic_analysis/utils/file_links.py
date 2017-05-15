@@ -39,7 +39,7 @@ file_inexperienced_orderby_age = path_in + 'nonExperiencedResult_orderby_partici
 path_1 = 'task1/'
 #       time
 file_task1_orderedby_totaltime_all_not_interupted = path_1+'all_was_not_interupted_taskid1_orderby_taskresult__totaltime.csv'
-file_task1_orderedby_totaltime_experienced_not_interupted = path_1+'experienced_was_not_interupted_task1_orderby_taskresult__totaltime.csv'
+file_task1_orderedby_totaltime_experienced_not_interupted = path_1+'experiencedResult_task1_orderby_totaltime.csv'
 file_task1_orderedby_totaltime_inexperienced_not_interupted = path_1+'inexperienced_was_not_interupted_task1_orderby_taskresult__totaltime.csv'
 #       correct
 file_task1_orderedby_totalcorrect_all_not_interupted = path_1+'all_was_not_interupted_taskid1_orderby_taskresult__total_correct_elements.csv'
@@ -61,7 +61,9 @@ file_task3_orderedby_totaltime_inexperienced_not_interupted = path_3+'inexperien
 #       correct
 file_task3_orderedby_totalcorrect_all_not_interupted = path_3+'all_was_not_interupted_taskid3_orderby_taskresult__total_correct_elements.csv'
 
-
+# Task 1, 2, 3
+file_task_1_2_3_totaltime = 'task_1_2_3_totaltime.csv'
+file_task_1_2_3_correct = 'task123_correct.csv'
 
 ## OLD
 

@@ -1,5 +1,8 @@
 from scipy import stats
-from .methods import readFileReturnFilteredData, readFilesReturnFilteredData
+import numpy as np
+from .methods import readFileReturnFilteredData, readFilesReturnFilteredData, readCsvFile
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+from statsmodels.stats.multicomp import MultiComparison
 
 
 def zscore_calculation(filename, filter):
@@ -156,3 +159,24 @@ def test_kruskalwallis(filename1, filename2, filename3, filter=None):
 
     result_kwallis = stats.mstats.kruskalwallis(data1, data2, data3)
     return result_kwallis
+
+
+def oneway_anova_posthoc_tukey(filename1, data_filter, signlev, transformeddata=None):
+    """
+        calculate all pairwise comparisons with TukeyHSD confidence intervals
+        this is just a wrapper around tukeyhsd method of MultiComparison
+    :param filename1:
+    :param filaneme2:
+    :param filename3:
+    :param filter:
+    :return:
+
+    """
+    data = readCsvFile(filename1)
+    if transformeddata is None:
+        data1 = data['time']
+    else:
+        data1 = transformeddata
+    mc = pairwise_tukeyhsd(data1, data['task'], signlev)
+    print(mc)
+    print(mc.groupsunique)
