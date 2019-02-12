@@ -73,8 +73,9 @@ def pairedTest(filename1, filename2):
 
 
 def createHistogram(filename, filter, xlabel='', ylabel='', title=''):
-    data = readFileReturnFilteredData(filename, filter)
-    plt.hist(data)
+    # data = readFileReturnFilteredData(filename, filter)
+    data = readCsvFile(filename)
+    plt.hist(data[filter])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
@@ -185,7 +186,7 @@ def create_bar_chart_data_x(filename, filter):
     plt.show()
 
 
-def create_bar_chart_survey(filename, filter):
+def create_bar_chart_survey(filename, filter, xlabel, ylabel):
     data = readCsvFile(filename)
     N = len(data)
     x = range(N)
@@ -203,13 +204,13 @@ def create_bar_chart_survey(filename, filter):
             colors.append('yellow')
 
     plt.bar(x, y, align='center', color=colors, alpha=0.7)
-    plt.xticks(x, data['difficulty'])
-    plt.ylabel(filter)
-    plt.xlabel('Difficulty')
+    # plt.xticks(x, data['difficulty'])
+    plt.ylabel(ylabel)
+    plt.xlabel(xlabel)
 
-    orange_patch = mpatches.Patch(color='orange', alpha=0.7, label='Task 1')
-    blue_patch = mpatches.Patch(color='b', alpha=0.7, label='Task 2')
-    green_patch = mpatches.Patch(color='g', alpha=0.7, label='Task 3')
+    orange_patch = mpatches.Patch(color='orange', alpha=0.7, label='Task A')
+    blue_patch = mpatches.Patch(color='b', alpha=0.7, label='Task B')
+    green_patch = mpatches.Patch(color='g', alpha=0.7, label='Task C')
     plt.legend(handles=[orange_patch, blue_patch, green_patch])
     plt.show()
 
