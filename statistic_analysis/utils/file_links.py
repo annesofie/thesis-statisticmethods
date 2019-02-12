@@ -8,6 +8,15 @@ file_excludetask4_orderby_totalcorrect = path + 'allExcludeTask4_Orderby_total_c
 
 file_excludetask4_orderby_age_filterlessthan2000 = path + 'allExcludeTask4totaltimebiggerthan2000orderbyparticipant__age.csv'
 
+# AGE
+path = 'age/'
+file_age_lte_31_totaltime_task1 = path+'age_filter_lessthanorequal_31_taskid1_orderby_taskresult__total_correct_elements.csv'
+file_age_lte_31_totaltime_task2 = path+'age_filter_lessthanorequal_31_taskid2_orderby_taskresult__total_correct_elements.csv'
+file_age_lte_31_totaltime_task3 = path+'age_filter_lessthanorequal_31_taskid3_orderby_taskresult__total_correct_elements.csv'
+file_age_gt_31_totaltime_task1 = path+'age_filter_greaterthan_31_taskid1_orderby_taskresult__total_correct_elements.csv'
+file_age_gt_31_totaltime_task2 = path+'age_filter_greaterthan_31_taskid2_orderby_taskresult__total_correct_elements.csv'
+file_age_gt_31_totaltime_task3 = path+'age_filter_greaterthan_31_taskid3_orderby_taskresult__total_correct_elements.csv'
+
 # Interupted
 path = 'was_interupted_participants/'
 file_was_interupted_orderedby_difficulty = path + 'allParticipants_wasinterupted_orderby_difficulty.csv'
@@ -20,6 +29,14 @@ file_experienced_exclude4_orderby_totaltime = path + 'experienced_was_not_interu
 file_experienced_exclude4_orderby_totalcorrect = path + 'experienced_was_not_interupted_exclude4_orderby_taskresult__total_correct_elements.csv'
 file_inexperienced_exclude4_orderby_totaltime = path + 'inexperienced_was_not_interupted_exclude4_orderby_taskresult__totaltime.csv'
 file_inexperienced_exclude4_orderby_totalcorrect = path + 'inexperienced_was_not_interupted_exclude4_orderby_taskresult__total_correct_elements.csv'
+
+#question one
+file_q1_orderby_geomtime = path+'all_was_not_interupted_exclude4_orderby_taskresult__geomtasktime.csv'
+file_q1_orderby_geomcorrect = 'all_was_not_interupted_exclude4_orderby_taskresult__correctgeom.csv'
+
+#question two
+file_q1_orderby_metatime = path+'all_was_not_interupted_exclude4_orderby_taskresult__metatasktime.csv'
+file_q2_orderby_metacorrect = path+'all_was_not_interupted_exclude4_orderby_taskresult__correctmetadata.csv'
 
 # Experienced
 path_e = 'experienced_participants/'
